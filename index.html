@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Informações básicas e PWA -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criador de Logo | Dr. Gabriel</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="apple-touch-icon" href="icon-192x192.png">
+
+    <!-- Estilos e Fontes -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@400;700&family=Nunito+Sans:wght@400;700&family=Cormorant+Garamond:wght@400;700&family=Lora:wght@400;700&family=Merriweather:wght@400;700&family=Playfair+Display:wght@400;700&family=EB+Garamond:wght@400;700&family=Josefin+Sans:wght@400;700&family=Raleway:wght@400;500;700&family=Oswald:wght@400;500&family=Montserrat:wght@400;500;600&family=Lato:wght@400;700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <!-- Estilos CSS (incorporados no HTML) -->
+    <style>
+        .font-lato { font-family: 'Lato', sans-serif; }
+        .font-montserrat { font-family: 'Montserrat', sans-serif; }
+        .font-poppins { font-family: 'Poppins', sans-serif; }
+        .font-roboto { font-family: 'Roboto', sans-serif; }
+        .font-open-sans { font-family: 'Open Sans', sans-serif; }
+        .font-nunito-sans { font-family: 'Nunito Sans', sans-serif; }
+        .font-cormorant-garamond { font-family: 'Cormorant Garamond', serif; }
+        .font-lora { font-family: 'Lora', serif; }
+        .font-merriweather { font-family: 'Merriweather', serif; }
+        .font-playfair-display { font-family: 'Playfair Display', serif; }
+        .font-eb-garamond { font-family: 'EB Garamond', serif; }
+        .font-josefin-sans { font-family: 'Josefin Sans', sans-serif; }
+        .font-raleway { font-family: 'Raleway', sans-serif; }
+        .font-oswald { font-family: 'Oswald', sans-serif; }
+
+        .loader { border: 4px solid #f3f3f3; border-top: 4px solid #3498db; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); padding: 10px 20px; border-radius: 8px; color: white; z-index: 1000; opacity: 0; transition: opacity 0.5s ease-in-out; }
+        .toast.show { opacity: 1; }
+        .toast.error { background-color: #EF4444; }
+        
+        input[type="color"] { -webkit-appearance: none; width: 44px; height: 44px; border: none; cursor: pointer; padding: 0; border-radius: 50%; box-shadow: 0 0 0 1px rgba(0,0,0,0.1); }
+        input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; border-radius: 50%; }
+        input[type="color"]::-webkit-color-swatch { border: 3px solid white; border-radius: 50%; }
+    </style>
+</head>
+<body class="bg-gray-100 font-lato">
+
+    <div id="toast-container" class="toast"></div>
+
+    <div class="container mx-auto p-4 md:p-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2 bg-white rounded-xl shadow-lg p-8 flex items-center justify-center min-h-[400px] lg:min-h-[600px]">
+                <div id="logo-canvas" class="p-8 transition-all duration-300">
+                    <div id="logo-container" class="flex flex-col items-center justify-center text-center gap-4">
+                        <div id="logo-icon-container" class="text-blue-600">
+                            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"></path></svg>
+                        </div>
+                         <img id="ai-logo-icon" src="" class="hidden" alt="Ícone gerado por IA"/>
+                        <div>
+                            <h1 id="logo-text" class="font-bold text-gray-800">Sua Clínica</h1>
+                            <p id="logo-slogan" class="text-gray-600">Psiquiatria & Bem-estar</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg p-6 space-y-6">
+                <!-- Seção de Controles (igual à anterior) -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Script PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').then(registration => {
+                    console.log('Service Worker registrado com sucesso:', registration);
+                }).catch(error => {
+                    console.log('Falha ao registrar Service Worker:', error);
+                });
+            });
+        }
+        
+        // Script do App (igual ao anterior)
+        document.addEventListener('DOMContentLoaded', () => {
+            // ... todo o seu código javascript anterior vai aqui ...
+        });
+    </script>
+</body>
+</html>
